@@ -7,6 +7,7 @@ import java.util.Locale;
 
 public class Read {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
     public static String readWordWithCapitalLetter() throws IOException {
         StringBuilder input = new StringBuilder(readStringLowerCase());
         return input.substring(0, 1).toUpperCase() + input.substring(1);
@@ -44,6 +45,11 @@ public class Read {
         return reader.readLine();
     }
 
+    public static String read(String message) throws IOException {
+        System.out.println(message);
+        return reader.readLine();
+    }
+
     public static boolean inputEqualsYes(String message) throws IOException {
         System.out.println(message + "press yes/any key");
         return read().equalsIgnoreCase("yes");
@@ -78,6 +84,11 @@ public class Read {
         }
     }
 
+    public static int readNumber(String message) throws IOException {
+        System.out.println(message);
+        return readNumber();
+    }
+
     public static String readStringWithoutSpaces() throws IOException {
         return read().replaceAll(" ", "");
     }
@@ -87,5 +98,12 @@ public class Read {
         return read().replaceAll(" ", "");
     }
 
+    public static char readCharacter(String message) throws IOException {
+        System.out.println(message);
+        return readCharacter();
+    }
 
+    private static char readCharacter() throws IOException {
+        return read().charAt(0);
+    }
 }
