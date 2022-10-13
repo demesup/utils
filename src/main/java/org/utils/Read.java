@@ -104,6 +104,13 @@ public class Read {
     }
 
     private static char readCharacter() throws IOException {
-        return read().charAt(0);
+        try {
+            var s= read();
+            if (s.length() > 1) throw new StringIndexOutOfBoundsException("Entered value is not a character");
+            return s.charAt(0);
+        } catch (StringIndexOutOfBoundsException e){
+            System.out.println(e.getMessage() + ". Try again");
+            return readCharacter();
+        }
     }
 }
