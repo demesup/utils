@@ -1,9 +1,7 @@
-package org.utils;
+package org.utils.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.utils.exception.NullValueException;
-import org.utils.exception.PatternMismatchException;
 
 @Getter
 @AllArgsConstructor

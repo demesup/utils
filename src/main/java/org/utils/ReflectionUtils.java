@@ -1,5 +1,6 @@
 package org.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.utils.annotationprocessing.AnnotationCheckerException;
 import org.utils.annotationprocessing.Checker;
 import org.utils.annotationprocessing.annotation.Patterned;
@@ -13,6 +14,7 @@ import java.util.*;
 
 import static org.utils.Utils.fieldIsAnnotatedBy;
 
+@Slf4j
 public class ReflectionUtils {
 
     public static List<Field> getNonStaticFields(Class<?> cl) {
@@ -137,7 +139,7 @@ public class ReflectionUtils {
                 );
             }
             default -> {
-                System.out.println("No checker method found for " + checker);
+                log.debug("No checker method found for " + checker);
                 return false;
             }
         }

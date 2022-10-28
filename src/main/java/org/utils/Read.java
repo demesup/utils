@@ -1,10 +1,15 @@
 package org.utils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Locale;
 
+import static org.utils.Utils.numberedArray;
+
+@Slf4j
 public class Read {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -14,7 +19,7 @@ public class Read {
     }
 
     public static String readWordWithCapitalLetter(String messageBefore) throws IOException {
-        System.out.println(messageBefore);
+        log.debug(messageBefore);
         return readWordWithCapitalLetter();
     }
 
@@ -23,7 +28,7 @@ public class Read {
     }
 
     public static String readStringLowerCase(String messageBefore) throws IOException {
-        System.out.println(messageBefore);
+        log.debug(messageBefore);
         return readStringLowerCase();
     }
 
@@ -32,12 +37,12 @@ public class Read {
     }
 
     public static String readStringUpperCaseWithoutSpace(String messageBefore) throws IOException {
-        System.out.println(messageBefore);
+        log.debug(messageBefore);
         return readStringWithoutSpaces().toUpperCase(Locale.ROOT);
     }
 
     public static String readString(String message) throws IOException {
-        System.out.println(message);
+        log.debug(message);
         return read();
     }
 
@@ -46,12 +51,12 @@ public class Read {
     }
 
     public static String read(String message) throws IOException {
-        System.out.println(message);
+        log.debug(message);
         return reader.readLine();
     }
 
     public static boolean inputEqualsYes(String message) throws IOException {
-        System.out.println(message + "press yes/any key");
+        log.debug(message + "press yes/any key");
         return read().equalsIgnoreCase("yes");
     }
 
@@ -64,29 +69,54 @@ public class Read {
             int number = Integer.parseInt(read());
             if (number > -1) return number;
         } catch (RuntimeException e) {
-            System.out.print(e.getMessage() + ". Try again. ");
+            log.debug(e.getMessage() + ". Try again. ");
         }
         return readPositiveNumber();
     }
 
     public static int readPositiveNumber(String message) throws IOException {
-        System.out.println(message);
+        log.debug(message);
         return readPositiveNumber();
     }
 
     public static int readNumber() throws IOException {
-        System.out.println("Enter number");
+        log.debug("Enter number");
         try {
             return Integer.parseInt(read());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            log.debug(e.getMessage());
             return readNumber();
         }
     }
 
     public static int readNumber(String message) throws IOException {
-        System.out.println(message);
+        log.debug(message);
         return readNumber();
+    }
+
+    public static int readNumber(int to, String message) throws IOException {
+        log.debug(message);
+        return readNumber(0, to);
+    }
+
+    public static int readNumber(int to) throws IOException {
+        return readNumber(0, to);
+    }
+
+    public static int readNumber(int from, int to) throws IOException {
+        if (from >= to) throw new IllegalArgumentException("From expected to be less than to");
+        int i = readNumber();
+        if (i >= from && i < to) {
+            return i;
+        } else {
+            log.debug("Number is not in boundaries" + from + ";" + to + ". Try again.");
+            return readNumber(from, to);
+        }
+    }
+
+    public static int readNumber(int from, int to, String message) throws IOException {
+        log.debug(message);
+        return readNumber(from, to);
     }
 
     public static String readStringWithoutSpaces() throws IOException {
@@ -94,23 +124,33 @@ public class Read {
     }
 
     public static String readStringWithoutSpaces(String message) throws IOException {
-        System.out.println(message);
+        log.debug(message);
         return read().replaceAll(" ", "");
     }
 
     public static char readCharacter(String message) throws IOException {
-        System.out.println(message);
+        log.debug(message);
         return readCharacter();
     }
 
     private static char readCharacter() throws IOException {
         try {
-            var s= read();
+            var s = read();
             if (s.length() > 1) throw new StringIndexOutOfBoundsException("Entered value is not a character");
             return s.charAt(0);
-        } catch (StringIndexOutOfBoundsException e){
-            System.out.println(e.getMessage() + ". Try again");
+        } catch (StringIndexOutOfBoundsException e) {
+            log.debug(e.getMessage() + ". Try again");
             return readCharacter();
         }
+    }
+
+    public static <T> T readEnumValue(T[] enumValues, String message) throws IOException {
+        log.debug(message);
+        return readEnumValue(enumValues);
+    }
+
+    public static <T> T readEnumValue(T[] enumValues) throws IOException {
+        log.debug(numberedArray(enumValues));
+        return enumValues[readNumber(enumValues.length)];
     }
 }
