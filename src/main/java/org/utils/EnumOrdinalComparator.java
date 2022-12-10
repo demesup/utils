@@ -2,7 +2,7 @@ package org.utils;
 
 import java.util.Comparator;
 
-public class EnumComparator implements Comparator<Enum> {
+public class EnumOrdinalComparator implements Comparator<Enum> {
 
     @Override
     public int compare(Enum o1, Enum o2) {

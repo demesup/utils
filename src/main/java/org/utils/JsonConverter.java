@@ -2,7 +2,6 @@ package org.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
+
 public class JsonConverter {
 
     private static final ObjectMapper om = new ObjectMapper();
@@ -21,7 +20,7 @@ public class JsonConverter {
 
     public static void saveList(List<?> list, File file, Class<?> cl) {
         if (list.isEmpty()) {
-            log.debug("List is empty");
+            System.out.println("List is empty");
             return;
         }
 
@@ -29,7 +28,7 @@ public class JsonConverter {
             om.writerFor(om.getTypeFactory().constructCollectionLikeType(List.class, cl))
                     .writeValue(file, list);
         } catch (IOException e) {
-            log.debug(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -38,7 +37,7 @@ public class JsonConverter {
         try {
             return om.readValue(file, om.getTypeFactory().constructCollectionLikeType(List.class, cl));
         } catch (IOException e) {
-            log.debug(e.getMessage());
+            System.out.println(e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -47,7 +46,7 @@ public class JsonConverter {
         try {
             om.writeValue(file, map.values());
         } catch (IOException e) {
-            log.debug(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }

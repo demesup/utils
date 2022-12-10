@@ -1,7 +1,6 @@
 package org.utils;
 
 import com.github.curiousoddman.rgxgen.RgxGen;
-import lombok.extern.slf4j.Slf4j;
 import org.utils.exception.PatternMismatchException;
 
 import java.io.IOException;
@@ -9,7 +8,7 @@ import java.util.regex.Pattern;
 
 import static org.utils.Read.read;
 
-@Slf4j
+
 public class Patterns {
 
     public static boolean checkMatchToPattern(Pattern pattern, String str) {
@@ -28,14 +27,14 @@ public class Patterns {
 
     public static String askStringWhileDoesNotMatchToPattern(Pattern pattern, String message) throws IOException {
         while (true) {
-            log.debug(message);
+            System.out.println(message);
             String str = read();
             if (pattern.equals(phonePattern())) {
                 str = str.replaceAll(" ", "");
             }
             if (pattern.matcher(str).matches()) {
                 return str;
-            } else log.debug("Does not match to pattern. Try again");
+            } else System.out.println("Does not match to pattern. Try again");
         }
     }
 

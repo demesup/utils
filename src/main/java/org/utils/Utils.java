@@ -1,6 +1,5 @@
 package org.utils;
 
-import lombok.extern.slf4j.Slf4j;
 import org.utils.model.Model;
 
 import java.io.IOException;
@@ -13,7 +12,6 @@ import java.util.stream.IntStream;
 
 import static org.utils.Read.readNumber;
 
-@Slf4j
 public class Utils {
     public static String mapInSeparatesLines(Map<?, ?> map) {
         StringBuilder builder = new StringBuilder();
@@ -58,7 +56,7 @@ public class Utils {
             builder.append(beautifulTitle(getTypeOfObject(list)));
             return String.valueOf(builder.append(listInSeparatedLines(list)));
         } catch (Exception e) {
-            log.debug(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -92,7 +90,7 @@ public class Utils {
         try {
             return list.get(number);
         } catch (IndexOutOfBoundsException e) {
-            log.debug(e.getMessage() + ". Try again");
+            System.out.println(e.getMessage() + ". Try again");
             return findModel(list, readNumber());
         }
     }
@@ -101,7 +99,7 @@ public class Utils {
         return field.isAnnotationPresent(annotation);
     }
 
-    public static <T> String numberedArray(T[] array){
+    public static <T> String numberedArray(T[] array) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < array.length; i++) {
             builder.append(i).append(" ").append(array[i]).append("\n");

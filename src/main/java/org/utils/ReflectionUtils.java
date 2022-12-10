@@ -1,6 +1,5 @@
 package org.utils;
 
-import lombok.extern.slf4j.Slf4j;
 import org.utils.annotationprocessing.AnnotationCheckerException;
 import org.utils.annotationprocessing.Checker;
 import org.utils.annotationprocessing.annotation.Patterned;
@@ -10,11 +9,12 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.utils.Utils.fieldIsAnnotatedBy;
 
-@Slf4j
 public class ReflectionUtils {
 
     public static List<Field> getNonStaticFields(Class<?> cl) {
@@ -139,7 +139,7 @@ public class ReflectionUtils {
                 );
             }
             default -> {
-                log.debug("No checker method found for " + checker);
+                System.out.println("No checker method found for " + checker);
                 return false;
             }
         }
