@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Country {
-    String name;
-    String code;
+  String name;
+  String code;
 }

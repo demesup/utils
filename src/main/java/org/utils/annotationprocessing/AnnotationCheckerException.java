@@ -12,10 +12,10 @@ import java.lang.annotation.Annotation;
 @AllArgsConstructor
 @Getter
 public enum AnnotationCheckerException {
-    NOT_NULL_VALUE(NotNullValue.class, NullValueException.class, Checker.IS_NULL_OR_EMPTY),
-    PATTERNED(Patterned.class, PatternMismatchException.class, Checker.CHECK_MATCH_TO_PATTERN);
+  NOT_NULL_VALUE(NotNullValue.class, NullValueException.class, Checker.IS_NULL_OR_EMPTY),
+  PATTERNED(Patterned.class, PatternMismatchException.class, Checker.CHECK_MATCH_TO_PATTERN);
 
-    final Class<? extends Annotation> annotationClass;
-    final Class<? extends RuntimeException> exceptionClass;
-    final Checker checker;
+  final Class<? extends Annotation> annotationClass;
+  final Class<? extends RuntimeException> exceptionClass;
+  final Checker checker;
 }
